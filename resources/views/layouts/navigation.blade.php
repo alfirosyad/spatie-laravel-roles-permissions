@@ -1,7 +1,6 @@
 @php
     $navLink = [
         ['name' => 'Dashboard', 'route' => 'dashboard'],
-        ['name' => 'Outlet', 'route' => 'admin.outlets.index'],
         ['name' => 'Role Management', 'route' => 'roles.index', 'permission' => 'all access'],
         ['name' => 'Permission Management', 'route' => 'permissions.index', 'permission' => 'all access']
     ];

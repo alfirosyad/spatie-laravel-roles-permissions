@@ -9,23 +9,31 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h1>Edit Role</h1>
-
-                    <form action="{{ route('roles.update', $role->id) }}" method="POST">
+                    <form method="post" action="{{ route('roles.update', $role->id) }}" class="mt-6 space-y-6">
                         @csrf
                         @method('PUT')
-                        <label for="name">Nama Role:</label>
-                        <input type="text" name="name" value="{{ $role->name }}" required>
-
-                        <h3>Permissions:</h3>
+                        <div>
+                            <x-input-label for="name" :value="__('Nama Role')"/>
+                            <x-text-input id="name" name="name" type="text" value="{{ $role->name }}" class="mt-1 block w-full"
+                                          autocomplete="off"/>
+                        </div>
+                        <p>Permission :</p>
                         @foreach($permissions as $permission)
-                            <div>
-                                <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
-                                <label>{{ $permission->name }}</label>
+                            <div class="relative flex gap-x-3">
+                                <div class="flex h-6 items-center">
+                                    <input id="permission" name="permissions[]" type="checkbox"
+                                           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                           value="{{ $permission->name }}" {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
+                                </div>
+                                <div class="text-sm leading-6">
+                                    <label for="permission"
+                                           class="font-medium text-gray-900">{{ $permission->name }}</label>
+                                </div>
                             </div>
                         @endforeach
-
-                        <button type="submit">Simpan Perubahan</button>
+                        <div class="flex justify-end gap-4">
+                            <x-primary-button>{{ __('Update') }}</x-primary-button>
+                        </div>
                     </form>
                 </div>
             </div>

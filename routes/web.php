@@ -23,10 +23,4 @@ Route::middleware('auth','roles:admin')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth', 'permissions:all access')->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('/outlets', [OutletController::class, 'index'])->name('admin.outlets.index');
-    });
-});
-
 require __DIR__.'/auth.php';
